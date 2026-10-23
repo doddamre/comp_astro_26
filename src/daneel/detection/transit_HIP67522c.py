@@ -13,9 +13,9 @@ HERE = Path(__file__).parent
 # This makes the paths below work no matter where you run the script from.
 ROOT = Path(__file__).parents[3]
 
-# Input table from the NASA Exoplanet Archivr.
+# Input table from the NASA Exoplanet Archive.
 # The "/" operator in pathlib joins path pieces, like "ROOT/data/file.csv".
-DATA_FILE = ROOT / "data" / "hip67522c_nasa_
+DATA_FILE = ROOT / "data" / "hip67522c_nasa_archive.csv"
 
 # The plot image is saved here, next to the
 PLOT_FILE = HERE / "hip67522c_transit.png"
@@ -40,7 +40,7 @@ params.rp = float(paper["pl_ratror"])           # planet radius [stellar radii]
 params.a = float(paper["pl_ratdor"])            # semi-major axis [stellar radii]
 params.inc = float(paper["pl_orbincl"])         # inclination [deg]
 params.ecc = float(paper["pl_orbeccen"])        # eccentricity
-params.w = float(paper["pl_orblper"])       [deg]
+params.w = float(paper["pl_orblper"])           # argument of periastron [deg]
 params.u = [0.319, 0.268]                       # limb-darkening coefficients
 params.limb_dark = "quadratic"
 
