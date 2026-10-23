@@ -36,7 +36,7 @@ class TransitModel:
         self.params.limb_dark = params_dict.get('limb_dark', 'quadratic')
         
         # Time array for model evaluation
-        self.t = np.linspace(-0.075, 0.075, 1000)
+        self.t = np.linspace(-0.25, 0.25, 1000)
         
         # Initialize batman model
         self.model = batman.TransitModel(self.params, self.t)
