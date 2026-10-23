@@ -1,0 +1,12 @@
+transit:
+  planet_name: HIP 67522 c
+  Source: Barber et al. 2024
+  per: 14.334892
+  rp: 0.0528
+  a: 19.14
+  inc: 89.20
+  ecc: 0.077
+  w: 186.6
+  t0: 0.0
+  limb_dark: quadratic
+  u: [0.319, 0.268]
