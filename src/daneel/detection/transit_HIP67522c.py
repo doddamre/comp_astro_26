@@ -5,16 +5,19 @@ import batman
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Folder that holds this script. __file__ is the script's own path,
-# and .parent drops the file name so only the folder is left.
-# This makes the paths below work no matter where you run the script from.
+# Folder that holds this script (src/daneel/detection). __file__ is the
+# script's own path, and .parent drops the file name so only the folder is left.
 HERE = Path(__file__).parent
 
-# Input table from the NASA Exoplanet Archive, inside the "data" subfolder.
-# The "/" operator in pathlib joins path pieces, like "HERE/data/file.csv".
-DATA_FILE = HERE / "data" / "hip67522c_nasa_archive.csv"
+# Top of the repo, three folders up: detection -> daneel -> src -> repo root.
+# This makes the paths below work no matter where you run the script from.
+ROOT = Path(__file__).parents[3]
 
-# The plot image is saved here, next to the script.
+# Input table from the NASA Exoplanet Archivr.
+# The "/" operator in pathlib joins path pieces, like "ROOT/data/file.csv".
+DATA_FILE = ROOT / "data" / "hip67522c_nasa_
+
+# The plot image is saved here, next to the
 PLOT_FILE = HERE / "hip67522c_transit.png"
 
 # -------- let's do it now --------
@@ -26,7 +29,6 @@ with open(DATA_FILE, encoding="utf-8") as f:
     rows = list(csv.DictReader(f))
     
 # Use the archive's default solution (Barber et al. 2024) for every value.
-# Taking numbers from different papers would give an orbit nobody fitted.
 paper = next(row for row in rows if row["default_flag"] == "1")
 
 # --- 2. Set up the transit model
@@ -36,13 +38,14 @@ params.t0 = 0.0                                 # mid-transit time [days]
 params.per = float(paper["pl_orbper"])          # orbital period [days]
 params.rp = float(paper["pl_ratror"])           # planet radius [stellar radii]
 params.a = float(paper["pl_ratdor"])            # semi-major axis [stellar radii]
-params.inc = float(paper["pl_orbincl"])
+params.inc = float(paper["pl_orbincl"])         # inclination [deg]
 params.ecc = float(paper["pl_orbeccen"])        # eccentricity
 params.w = float(paper["pl_orblper"])       [deg]
 params.u = [0.319, 0.268]                       # limb-darkening coefficients
 params.limb_dark = "quadratic"
 
-print("Barber et al. 2024:", params.per, params.rp, params.a, params.inc, params.ecc, params.w)
+print("Barber et al. 2024:", params.per, params.rp, params.a,
+      params.inc, params.ecc, params.w)
 
 # --- 3. Compute the light curve
 
